@@ -1,0 +1,5 @@
+<div class="list-group" *ngFor="let item of list">  
+  <a class="list-group-item list-group-item-action" [routerLink]="['/tournament']" (click)='setTournamentToDisplay(item)'>
+    {{item.name}}
+  </a>    
+</div>

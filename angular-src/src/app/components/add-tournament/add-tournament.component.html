@@ -1,0 +1,93 @@
+<div class="row">
+  <div class="col-12 col-md-6 mx-md-auto">
+    <h2 class="page-header text-center mx-5">Создать турнир</h2>
+    <form (submit)="onAddTournamentSubmit()" >
+      <div class="form-group">
+        <label for="name">Название турнира</label>
+        <input type="text" [(ngModel)]="name" name="name" class="form-control" id="name" placeholder="Название турнира">
+      </div>
+      <div class="form-group">
+        <label for="type">Тип турнира</label>
+        <select [(ngModel)]="type" name="type" class="custom-select" id="type">
+          <option value='1'>Круговой</option>
+          <option value='2'>Швейцарская система</option>
+          <option value='3'>Олимпийская система</option>
+        </select>
+      </div>
+      <div *ngIf='type == 1'>
+        <div class="form-group">
+          <label for="rounds">Количество туров</label>
+          <input type="text" [(ngModel)]="opt" name="opt" class="form-control" id="opt" placeholder="Количество туров">
+        </div>
+      </div>
+
+      <div *ngIf='type == 2'>
+        <div class="form-group">
+          <label for="rounds">Количество раундов</label>
+          <input type="text" class="form-control" id="as" placeholder="Количество туров">
+        </div>
+      </div>
+
+      <div *ngIf='type == 3'>
+          <p>asdasd</p>
+          <p>asdasd</p>
+          <p>asdasd</p>
+          <p>asdasd</p>
+      </div>
+
+  <button type="button" class="btn btn-primary my-3" data-toggle="modal" data-target="#addPlayersModal">
+    Добавить участников
+  </button>
+
+  <!-- Модальное окно для добавления участников турнира -->
+  <div class="modal fade" id="addPlayersModal" tabindex="-1" role="dialog" aria-labelledby="addPlayersModalTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="addPlayersModalTitle">Выберите участников турнира</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <table class="table table-sm table-hover">
+            <tbody>
+              <tr *ngFor="let item of playersList" (click)="togglePlayer(item)">
+                <td>{{item.firstName}} {{item.lastName}}</td>
+                <td>{{item.elo}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Готово</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <table class="table table-sm col-8 mx-auto" *ngIf='participants.length'>
+    <thead>
+      <tr>
+        <th scope="col">Участник</th>
+        <th scope="col">Рейтинг</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of participants">
+        <td>{{item.firstName}} {{item.lastName}}</td>
+        <td>{{item.elo}}</td>
+        <td (click)="removeFromParticipants(item)"><i class="fas fa-minus-square text-danger"></i></td>
+      </tr>
+    </tbody>
+  </table>
+
+      <br>
+      <input type="submit" class="btn btn-primary" value="Создать">
+    </form>
+  </div>
+
+</div>
